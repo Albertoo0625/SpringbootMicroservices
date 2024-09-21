@@ -29,6 +29,36 @@ services:
       - microservices-net
     restart: unless-stopped
 
+  mongodb:
+    container_name: ms_mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+    networks:
+      - microservices-net
+    volumes:
+      - mongodb:/var/lib/mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+
+  mongo-express:
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    networks:
+      - microservices-net
+
 networks:
     microservices-net:
       driver: bridge
@@ -36,4 +66,6 @@ networks:
 volumes:
     postgres:
     pgadmin:
+    mongodb:
+
 
