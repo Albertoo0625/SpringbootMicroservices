@@ -12,10 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Customer {
     @Id
-    public String Id;
-    public String Firstname;
-    public String Lastname;
-    public String Email;
+    public String id;
+    public String firstname;
+    public String lastname;
+    public String email;
     public Address address;
 
 }
