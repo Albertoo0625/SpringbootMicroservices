@@ -3,14 +3,14 @@ spring:
     username: albertoo
     password: albertoo
     driver-class-name: org.postgresql.Driver
-    host: 192.168.1.108
+    host: localhost
     port: 5432
     database: albertoo
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}
   jpa:
     hibernate:
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: validate
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
