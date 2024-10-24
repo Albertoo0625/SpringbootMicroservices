@@ -1,5 +1,6 @@
 package com.example.ecommerce.product;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,8 @@ public class ProductController {
     private final ProductService service;
 
     @PostMapping
-    public ResponseEntity<Integer> createProduct(ProductRequest request){
+    public ResponseEntity<Integer> createProduct(
+            @RequestBody @Valid ProductRequest request){
         return ResponseEntity.ok(service.createProduct(request));
     }
 
@@ -27,8 +29,13 @@ public class ProductController {
 
     @GetMapping("/{product_id}")
     public ResponseEntity<ProductResponse> findById(
-            @RequestParam Integer productId
+            @RequestParam("product_id") Integer productId
     ){
         return ResponseEntity.ok(service.findById(productId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> findAll(){
+        return ResponseEntity.ok(service.findAll());
     }
 }
